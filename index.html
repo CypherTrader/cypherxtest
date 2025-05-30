@@ -15,36 +15,32 @@
     <!-- SUPABASE CLIENT -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        /* Seus estilos existentes aqui */
-        /* ... */
+        /* ... Seus estilos existentes permanecem aqui, sem alterações ... */
     </style>
 </head>
 <body>
-    <!-- Seu conteúdo existente aqui -->
+    <!-- ... TODO O SEU CONTEÚDO EXISTENTE ... -->
 
-    <!-- Formulário de Autenticação Supabase -->
-    <div class="glass-card" style="max-width:400px;margin:40px auto;">
-      <h2>Entrar</h2>
-      <form id="login-form">
+    <!-- Bloco de Autenticação Supabase (discreto, pode ser removido/ocultado se não quiser exibir na tela) -->
+    <div id="auth-area" style="max-width:400px;margin:40px auto;display:none;">
+      <form id="login-form" style="margin-bottom:18px;">
         <label for="login-email">E-mail</label>
         <input type="email" id="login-email" required>
         <label for="login-password">Senha</label>
         <input type="password" id="login-password" required>
         <button type="submit">Entrar</button>
-        <p id="login-error" style="color:var(--destructive-color);"></p>
+        <p id="login-error" style="color:var(--destructive-color);font-size:0.95em;"></p>
       </form>
-      <hr style="margin: 24px 0;">
-      <h2>Criar conta</h2>
       <form id="register-form">
         <label for="register-email">E-mail</label>
         <input type="email" id="register-email" required>
         <label for="register-password">Senha</label>
         <input type="password" id="register-password" required>
-        <button type="submit">Registrar</button>
-        <p id="register-error" style="color:var(--destructive-color);"></p>
+        <button type="submit">Cadastrar</button>
+        <p id="register-error" style="color:var(--destructive-color);font-size:0.95em;"></p>
       </form>
-      <button id="logout-btn" style="display:none;margin-top:20px;">Sair</button>
-      <div id="welcome-message" style="display:none;margin-top:20px;color:var(--win-color);font-weight:bold;"></div>
+      <button id="logout-btn" style="display:none;margin-top:18px;">Sair</button>
+      <div id="welcome-message" style="display:none;margin-top:16px;color:var(--win-color);font-weight:bold;"></div>
     </div>
 
     <!-- Script de Autenticação Supabase -->
@@ -55,63 +51,57 @@
 
       const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-      // Mostrar/ocultar formulários conforme autenticação
-      async function updateUI() {
+      // Função para atualizar interface
+      async function updateAuthUI() {
         const { data: { session } } = await supabase.auth.getSession();
+        const authArea = document.getElementById('auth-area');
+        if (!authArea) return;
         if (session) {
-          document.getElementById('logout-btn').style.display = 'block';
           document.getElementById('login-form').style.display = 'none';
           document.getElementById('register-form').style.display = 'none';
+          document.getElementById('logout-btn').style.display = 'block';
           document.getElementById('welcome-message').style.display = 'block';
           document.getElementById('welcome-message').textContent = 'Bem-vindo, ' + (session.user.email || 'usuário') + '!';
         } else {
-          document.getElementById('logout-btn').style.display = 'none';
           document.getElementById('login-form').style.display = 'block';
           document.getElementById('register-form').style.display = 'block';
+          document.getElementById('logout-btn').style.display = 'none';
           document.getElementById('welcome-message').style.display = 'none';
         }
+        // Exibe o bloco de autenticação (remova se for modal ou overlay)
+        authArea.style.display = 'block';
       }
 
-      // Login
+      // Eventos de formulário
       document.getElementById('login-form').addEventListener('submit', async function(e) {
         e.preventDefault();
         const email = document.getElementById('login-email').value;
         const password = document.getElementById('login-password').value;
         const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) {
-          document.getElementById('login-error').textContent = error.message;
-        } else {
-          document.getElementById('login-error').textContent = '';
-          updateUI();
-        }
+        document.getElementById('login-error').textContent = error ? error.message : '';
+        updateAuthUI();
       });
 
-      // Registro
       document.getElementById('register-form').addEventListener('submit', async function(e) {
         e.preventDefault();
         const email = document.getElementById('register-email').value;
         const password = document.getElementById('register-password').value;
         const { error } = await supabase.auth.signUp({ email, password });
-        if (error) {
-          document.getElementById('register-error').textContent = error.message;
-        } else {
-          document.getElementById('register-error').textContent = '';
-          alert('Cadastro realizado! Verifique seu e-mail para confirmar.');
-        }
+        document.getElementById('register-error').textContent = error ? error.message : '';
+        if (!error) alert('Cadastro realizado! Verifique seu e-mail para confirmar.');
+        updateAuthUI();
       });
 
-      // Logout
       document.getElementById('logout-btn').addEventListener('click', async function() {
         await supabase.auth.signOut();
-        updateUI();
+        updateAuthUI();
       });
 
-      // Atualizar UI ao carregar
-      updateUI();
-
-      // Atualizar UI ao mudar sessão (login/logout em outras abas)
+      // Atualiza UI ao carregar
+      updateAuthUI();
+      // Atualiza UI ao mudar sessão (login/logout em outras abas)
       supabase.auth.onAuthStateChange((_event, _session) => {
-        updateUI();
+        updateAuthUI();
       });
     </script>
 </body>
