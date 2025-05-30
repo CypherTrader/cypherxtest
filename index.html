@@ -12,6 +12,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial@^0.2.0/dist/chartjs-chart-financial.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@^3.0.0"></script>
+    <!-- IF USING SUPABASE, ADD THE CLIENT LIBRARY HERE -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script> -->
 
 
     <style>
@@ -37,17 +39,17 @@
             --input-bg-dark-theme: rgba(30, 30, 60, 0.7);
             --input-border-dark-theme: rgba(120, 120, 220, 0.3);
             --chart-bg-dark-theme: var(--background-dark-theme);
-            --chart-canvas-bg-dark-theme: rgba(10, 10, 20, 0.9); /* Dark background for chart canvas in dark theme */
+            --chart-canvas-bg-dark-theme: rgba(10, 10, 20, 0.9); 
             --chart-grid-color-dark-theme: rgba(255, 255, 255, 0.03);
             --chart-tick-color-dark-theme: var(--text-muted-dark-theme);
-            --chart-line-color-dark-theme: var(--primary-color); /* Vibrant for dark */
+            --chart-line-color-dark-theme: var(--primary-color); 
             --chart-line-color-alpha-dark-theme: rgba(0, 191, 255, 0.5);
             --chart-line-fill-dark-theme: rgba(0, 191, 255, 0.05);
 
 
             /* Light Theme Variables */
             --background-light-theme: #f0f2f5; 
-            --header-bg-light-theme: #ffffff; /* White header for light theme */
+            --header-bg-light-theme: #ffffff; 
             --text-dark-theme: #1c1c2e; 
             --text-muted-light-theme: #5c5c7a;
             --card-background-light-theme: #ffffff;
@@ -55,10 +57,10 @@
             --input-bg-light-theme: #e8eaf0;
             --input-border-light-theme: rgba(0, 0, 0, 0.15);
             --chart-bg-light-theme: #f0f2f5;
-            --chart-canvas-bg-light-theme: #ffffff; /* White background for chart canvas in light theme */
+            --chart-canvas-bg-light-theme: #ffffff; 
             --chart-grid-color-light-theme: rgba(0, 0, 0, 0.05);
             --chart-tick-color-light-theme: var(--text-muted-light-theme);
-            --chart-line-color-light-theme: #005f73; /* Dark contrasting blue for light */
+            --chart-line-color-light-theme: #005f73; 
             --chart-line-color-alpha-light-theme: rgba(0, 95, 115, 0.5);
             --chart-line-fill-light-theme: rgba(0, 95, 115, 0.05);
             
@@ -102,7 +104,7 @@
             --current-input-bg: var(--input-bg-light-theme);
             --current-input-border: var(--input-border-light-theme);
             --current-chart-bg: var(--chart-bg-light-theme);
-            --current-chart-canvas-bg: var(--chart-canvas-bg-light-theme); /* Ensure this is white for light theme */
+            --current-chart-canvas-bg: var(--chart-canvas-bg-light-theme); 
             --current-chart-grid-color: var(--chart-grid-color-light-theme);
             --current-chart-tick-color: var(--chart-tick-color-light-theme);
             --current-chart-line-color: var(--chart-line-color-light-theme);
@@ -129,7 +131,7 @@
             min-height: 100vh;
             overflow-x: hidden; 
             transition: background-color 0.3s ease, color 0.3s ease;
-            position: relative; /* For #space-background */
+            position: relative; 
         }
 
         #space-background {
@@ -138,9 +140,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Behind all content */
+            z-index: -1; 
             overflow: hidden;
-            background-color: var(--current-background); /* Fallback */
+            background-color: var(--current-background); 
         }
 
         .stars {
@@ -177,7 +179,7 @@
         }
         body.light-theme #stars2 { opacity: 0.25; }
 
-        #distant-planets { /* Placeholder for more complex elements */
+        #distant-planets { 
             background-image: radial-gradient(ellipse at 20% 80%, rgba(var(--primary-color-rgb), 0.05) 0%, transparent 70%);
             animation: movePlanets 300s linear infinite alternate;
              opacity: 0.7;
@@ -280,6 +282,7 @@
         input[type="text"],
         input[type="email"],
         input[type="password"],
+        input[type="tel"], /* Added for phone */
         input[type="number"],
         select {
             width: 100%;
@@ -323,7 +326,7 @@
         a:hover { color: var(--primary-hover); text-decoration: underline; }
 
         header {
-            background-color: var(--current-header-bg); /* Uses theme variable */
+            background-color: var(--current-header-bg); 
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
             padding: 15px 30px;
@@ -387,13 +390,14 @@
             flex-grow: 1; padding: 30px;
             max-width: 1600px; 
             margin: 0 auto; width: 100%;
-            position: relative; /* Ensure content is above background */
+            position: relative; 
             z-index: 1;
         }
         .page-section { display: none; animation: fadeIn 0.5s ease-out forwards; }
         .page-section.active { display: block; }
 
         #auth-page .auth-container { max-width: 400px; margin: 50px auto; padding: 30px; }
+        .form-toggle { margin-top: 15px; text-align: center; font-size: 0.9rem; }
         
         .chart-controls-common { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; justify-content: center; align-items: center; }
         .chart-controls-common .selector-group { display: flex; align-items: center; gap: 5px;}
@@ -464,7 +468,7 @@
         }
 
         .scanner-page-chart-canvas { 
-            background-color: var(--current-chart-canvas-bg); /* THEME VARIABLE FOR CANVAS BG */
+            background-color: var(--current-chart-canvas-bg); 
             border-radius: 6px;  
             transition: background-color 0.3s ease;
         }
@@ -664,18 +668,38 @@
                         <input type="password" id="login-password" placeholder="********" required>
                     </div>
                     <button type="submit"><i class="fas fa-sign-in-alt"></i> Entrar na Nave</button>
+                    <p class="form-toggle">Novo tripulante? <a href="#" onclick="toggleAuthForm('register'); return false;">Cadastre sua espaçonave!</a></p>
                 </form>
-                <!-- Registration form can be kept for completeness, or removed if truly only login is needed -->
-                 <form id="register-form" style="display: none;">
-                    <p style="text-align:center; margin-bottom:15px;">Para registrar, contate o suporte.</p>
-                    <p class="form-toggle" style="text-align:center;">Já tem uma conta? <a href="#" onclick="toggleAuthForm('login'); return false;">Acessar painel de controle!</a></p>
+
+                <form id="register-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="register-name">Nome do Piloto:</label>
+                        <input type="text" id="register-name" placeholder="Seu nome completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email de Contato:</label>
+                        <input type="email" id="register-email" placeholder="piloto@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-phone">Telefone (com DDD):</label>
+                        <input type="tel" id="register-phone" placeholder="(00) 00000-0000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Defina sua Senha:</label>
+                        <input type="password" id="register-password" placeholder="Mínimo 6 caracteres" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-confirm-password">Confirme a Senha:</label>
+                        <input type="password" id="register-confirm-password" placeholder="Repita a senha" required>
+                    </div>
+                    <button type="submit"><i class="fas fa-user-plus"></i> Criar Conta e Decolar</button>
+                    <p class="form-toggle">Já tem uma conta? <a href="#" onclick="toggleAuthForm('login'); return false;">Acessar painel de controle!</a></p>
                 </form>
             </div>
         </section>
         
         <section id="scanner-page" class="page-section">
             <h1 style="text-align: center; margin-bottom: 20px;"><i class="fas fa-binoculars"></i> Scanner de Sinais - 2 Telas</h1>
-            <!-- Controls for number of charts removed -->
             <div id="scanner-page-grid-container">
                 <!-- Chart panels will be dynamically inserted here by JS -->
             </div>
@@ -707,17 +731,32 @@
         });
     })([Element.prototype, Document.prototype, DocumentFragment.prototype]);
 
+    // --- SUPABASE CLIENT INITIALIZATION PLACEHOLDER ---
+    // const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+    // const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+    // let supabase = null;
+    // try {
+    //   if (window.supabase && SUPABASE_URL && SUPABASE_ANON_KEY) {
+    //      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    //      console.log("Supabase client initialized.");
+    //   } else {
+    //      console.warn("Supabase client library not found or URL/KEY missing. Auth features will be simulated.");
+    //   }
+    // } catch (e) {
+    //    console.error("Error initializing Supabase client:", e);
+    // }
+
 
     // --- Variáveis Globais & Referências DOM ---
     const appContentEl = document.getElementById('app-content');
-    const navLinkEls = document.querySelectorAll('.nav-link'); // Will be fewer now
+    const navLinkEls = document.querySelectorAll('.nav-link');
     const pageSectionEls = document.querySelectorAll('.page-section');
     const messageBoxEl = document.getElementById('message-box');
     const messageBoxTitleEl = document.getElementById('message-box-title');
     const messageBoxContentEl = document.getElementById('message-box-content');
     const overlayEl = document.getElementById('overlay');
     const logoutNavItemEl = document.getElementById('logout-nav-item');
-    const scannerNavItemEl = document.getElementById('scanner-nav-item'); // Added for easier access
+    const scannerNavItemEl = document.getElementById('scanner-nav-item');
     const themeToggleButton = document.getElementById('theme-toggle-button');
     const authTitleEl = document.getElementById('auth-title');
     const loginFormEl = document.getElementById('login-form');
@@ -730,7 +769,7 @@
     const DEFAULT_CHART_PANEL_SETTINGS = {
         currentAsset: 'BTC',
         currentTimeframe: '1m', 
-        currentBot: 'alien', // Will be overridden for fixed panels
+        currentBot: 'alien', 
         currentChartType: 'line', 
         chartInstance: null,
         webSocket: null,
@@ -749,20 +788,20 @@
     const CHART_PANEL_MAX_CANDLES_STORE = 750; 
     const CHART_PANEL_MAX_RECONNECT_ATTEMPTS = 5;
     
-    const CHART_PANEL_ASSET_CONFIG = { // Kept for asset selection within panels
+    const CHART_PANEL_ASSET_CONFIG = { 
         'BTC': { type: 'crypto', symbol: 'BTC', binanceStreamSymbol: 'btcusdt', binanceRestSymbol: 'BTCUSDT', pricePrecision: 2, coingeckoId: 'bitcoin' },
         'ETH': { type: 'crypto', symbol: 'ETH', binanceStreamSymbol: 'ethusdt', binanceRestSymbol: 'ETHUSDT', pricePrecision: 2, coingeckoId: 'ethereum' },
         'SOL': { type: 'crypto', symbol: 'SOL', binanceStreamSymbol: 'solusdt', binanceRestSymbol: 'SOLUSDT', pricePrecision: 4, coingeckoId: 'solana' },
         'ADA': { type: 'crypto', symbol: 'ADA', binanceStreamSymbol: 'adausdt', binanceRestSymbol: 'ADAUSDT', pricePrecision: 4, coingeckoId: 'cardano' },
         'XRP': { type: 'crypto', symbol: 'XRP', binanceStreamSymbol: 'xrpusdt', binanceRestSymbol: 'XRPUSDT', pricePrecision: 4, coingeckoId: 'ripple' },
     };
-    const CHART_PANEL_TIMEFRAME_CONFIG = { // Kept for timeframe selection within panels
+    const CHART_PANEL_TIMEFRAME_CONFIG = { 
         '1m': { label: 'M1', binanceInterval: '1m', durationMs: 60000, luxonUnit: 'minute' },
         '5m': { label: 'M5', binanceInterval: '5m', durationMs: 300000, luxonUnit: 'minute' },
         '15m': { label: 'M15', binanceInterval: '15m', durationMs: 900000, luxonUnit: 'minute' },
     };
     
-    const CHART_PANEL_BOT_CONFIG = { // Only Alien and Fire are directly used, but keep others for future or if process functions are generic
+    const CHART_PANEL_BOT_CONFIG = { 
         'alien': { name: 'Alien Bot 👽', processFunction: processAlienBotData },
         'fire': { name: 'Fire Bot 🔥', processFunction: processFireBotData },
         'dragon-bot': { name: 'Dragon Bot 🐲', processFunction: processDragonBotData },
@@ -772,7 +811,7 @@
         'ghost-bot': { name: 'Ghost Bot 👻', processFunction: processGhostBotData },
         'baby-bot': { name: 'Baby Bot 👶🏻', processFunction: processBabyBotData },
         'ninja-bot': { name: 'Ninja Bot 🐱‍👤', processFunction: processNinjaBotData },
-        'wizard-bot': { name: 'Wizard Bot 🧙🏻‍♂️', processFunction: processWizardBotData } // Keep Wizard if defined
+        'wizard-bot': { name: 'Wizard Bot 🧙🏻‍♂️', processFunction: processWizardBotData }
     };
 
     let currentUserIsAuthenticated = false;
@@ -823,7 +862,7 @@
         chartInstance.options.scales.x.ticks.color = tickColor;
         chartInstance.options.scales.y.grid.color = gridColor;
         chartInstance.options.scales.y.ticks.color = tickColor;
-        if (chartInstance.canvas) chartInstance.canvas.style.backgroundColor = canvasBgColor; // Apply canvas background
+        if (chartInstance.canvas) chartInstance.canvas.style.backgroundColor = canvasBgColor; 
 
         if (chartInstance.config.type === 'line' || (chartInstance.data.datasets[0] && chartInstance.data.datasets[0].type === 'line')) {
             chartInstance.data.datasets[0].borderColor = lineAlphaColor; 
@@ -1010,6 +1049,9 @@
     }
     window.logout = function() {
         currentUserIsAuthenticated = false;
+        // if (supabase && supabase.auth) {
+        //    supabase.auth.signOut().catch(console.error);
+        // }
         disableAuthNav();
         showPage('auth-page');
         showToastNotification('Sessão Encerrada', 'Você foi desconectado da nave.', 'info');
@@ -1024,16 +1066,84 @@
             authTitleEl.textContent = 'Registrar Nova Espaçonave';
         }
     }
-    loginFormEl.addEventListener('submit', (e) => {
+
+    loginFormEl.addEventListener('submit', async (e) => {
         e.preventDefault();
-        // Dummy login success
-        currentUserIsAuthenticated = true; enableAuthNav();
-        showToastNotification('Login Bem-Sucedido', 'Bem-vindo(a) de volta, piloto!', 'success');
-        showPage('scanner-page'); 
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+
+        // if (supabase && supabase.auth) {
+        //     try {
+        //         const { data, error } = await supabase.auth.signInWithPassword({
+        //             email: email,
+        //             password: password,
+        //         });
+        //         if (error) throw error;
+        //         // console.log('Supabase Login Success:', data);
+        //         currentUserIsAuthenticated = true; 
+        //         enableAuthNav();
+        //         showToastNotification('Login Bem-Sucedido', 'Bem-vindo(a) de volta, piloto!', 'success');
+        //         showPage('scanner-page'); 
+        //     } catch (error) {
+        //         console.error('Supabase Login Error:', error);
+        //         showMessageBox('Erro de Login', `Falha ao autenticar: ${error.message || error}`, 'error');
+        //     }
+        // } else {
+            // Fallback: Dummy login success if Supabase client is not available
+            currentUserIsAuthenticated = true; 
+            enableAuthNav();
+            showToastNotification('Login Bem-Sucedido (Simulado)', 'Bem-vindo(a) de volta, piloto!', 'success');
+            showPage('scanner-page'); 
+        // }
     });
-    registerFormEl.addEventListener('submit', (e) => { // Simplified - no actual registration
+
+    registerFormEl.addEventListener('submit', async (e) => {
         e.preventDefault();
-         showMessageBox('Registro Indisponível', 'Funcionalidade de registro desabilitada nesta versão. Contate o suporte.', 'info');
+        const name = document.getElementById('register-name').value;
+        const email = document.getElementById('register-email').value;
+        const phone = document.getElementById('register-phone').value;
+        const password = document.getElementById('register-password').value;
+        const confirmPassword = document.getElementById('register-confirm-password').value;
+
+        if (password !== confirmPassword) {
+            showMessageBox('Erro de Cadastro', 'As senhas não coincidem. Verifique as coordenadas.', 'error');
+            return;
+        }
+        if (password.length < 6) {
+            showMessageBox('Erro de Cadastro', 'A senha deve ter no mínimo 6 caracteres.', 'error');
+            return;
+        }
+
+        // if (supabase && supabase.auth) {
+        //     try {
+        //         const { data, error } = await supabase.auth.signUp({
+        //             email: email,
+        //             password: password,
+        //             options: {
+        //                 data: { // Additional user metadata
+        //                     full_name: name,
+        //                     phone: phone,
+        //                     // You can add other custom fields here
+        //                 }
+        //             }
+        //         });
+        //         if (error) throw error;
+        //         // console.log('Supabase SignUp Success:', data);
+        //         // Typically, Supabase sends a confirmation email. 
+        //         // You might want to show a message to check email.
+        //         showMessageBox('Registro Enviado!', 'Verifique seu email para confirmar sua conta. Após a confirmação, você poderá fazer login.', 'success');
+        //         toggleAuthForm('login'); // Switch to login form or a "check email" message page
+        //     } catch (error) {
+        //         console.error('Supabase SignUp Error:', error);
+        //         showMessageBox('Erro de Cadastro', `Falha ao registrar: ${error.message || error}`, 'error');
+        //     }
+        // } else {
+            // Fallback: Dummy registration success if Supabase client is not available
+            currentUserIsAuthenticated = true; // For demo, log in directly
+            enableAuthNav();
+            showToastNotification('Cadastro Realizado (Simulado)', 'Sua conta foi criada e sua nave está pronta para decolar!', 'success');
+            showPage('scanner-page');
+        // }
     });
 
 
@@ -1324,38 +1434,44 @@
             return { signals, warmupPeriod: Math.max(guideLength,length,rsiLength+1) };
         });
     }
-    // --- Other bot processing functions can be kept or removed if not used ---
-    function processDragonBotData(candles) { /* ... */ return {signals:[], warmupPeriod:1}; }
-    function processPumpkinBotData(candles) { /* ... */ return {signals:[], warmupPeriod:1}; }
-    function processWhiteBotData(candles) { /* ... */ return {signals:[], warmupPeriod:1}; }
-    function processShitBotData(candles) { /* ... */ return {signals:[], warmupPeriod:1}; }
-    function processGhostBotData(candles) { /* ... */ return {signals:[], warmupPeriod:1}; }
-    function processBabyBotData(candles) { /* ... */ return {signals:[], warmupPeriod:1}; }
-    function processNinjaBotData(candles) { return _calculateBotSignalsAndBacktest(candles, cypherImpulse); } // Keep if used
-    function processWizardBotData(candles_input) { // Keep if used
-        return _calculateBotSignalsAndBacktest(candles_input, (c_arr) => {
-            const settings = {
-                atrLength: 10, factor: 3, trainingPeriod: 100,
-                highVolGuess: 0.75, midVolGuess: 0.5, lowVolGuess: 0.25,
-            };
-            const superTrendResults = calculateAdaptiveSuperTrend(c_arr, settings);
-            const signals = [];
-            let prevDirection = null;
-            for (let i = 0; i < superTrendResults.length; i++) {
-                const currentResult = superTrendResults[i];
-                let signal = null;
-                if (currentResult && currentResult.direction !== null) {
-                    if (prevDirection !== null) {
-                        if (currentResult.direction === 1 && prevDirection === -1) signal = 'buy';
-                        else if (currentResult.direction === -1 && prevDirection === 1) signal = 'sell';
-                    }
-                    prevDirection = currentResult.direction;
-                } else { prevDirection = null; }
-                signals.push(signal);
-            }
-            return { signals, warmupPeriod: settings.trainingPeriod + settings.atrLength };
-        });
+    function processDragonBotData(candles) { return {signals:[], warmupPeriod:1}; }
+    function processPumpkinBotData(candles) { return {signals:[], warmupPeriod:1}; }
+    function processWhiteBotData(candles) { return {signals:[], warmupPeriod:1}; }
+    function processShitBotData(candles) { return {signals:[], warmupPeriod:1}; }
+    function processGhostBotData(candles) { return {signals:[], warmupPeriod:1}; }
+    function processBabyBotData(candles) { return {signals:[], warmupPeriod:1}; }
+    function cypherImpulse(data) { 
+      const closePrices = data.map(d => d.c);
+      const length = 20; const mult = 2.5; const rsiLength = 14;
+      const rsiLevelUp = 75; const rsiLevelDown = 25;
+      if (closePrices.length < Math.max(length, rsiLength) + 1) { 
+        return { signals: Array(data.length).fill(null), warmupPeriod: Math.max(length, rsiLength) + 1 };
+      }
+      const basisArr = arraySma(closePrices, length); 
+      const stdArr = arrayStdev(closePrices, length); 
+      const upperArr = basisArr.map((b, i) => (b !== null && stdArr[i] !== null ? b + mult * stdArr[i] : null));
+      const lowerArr = basisArr.map((b, i) => (b !== null && stdArr[i] !== null ? b - mult * stdArr[i] : null));
+      const rsiArr = arrayRsi(closePrices, rsiLength); 
+      const signals = []; const warmup = Math.max(length, rsiLength) +1; 
+      for (let i = 0; i < data.length; i++) {
+        if (i < warmup) { signals.push(null); continue; }
+        const rsiPrev = rsiArr[i - 1]; const rsiCurr = rsiArr[i];
+        const closePrev = closePrices[i - 1]; const closeCurr = closePrices[i];
+        const upperPrevVal = upperArr[i - 1];  const lowerPrevVal = lowerArr[i - 1]; 
+        let currentSignal = null;
+        if (rsiPrev !== null && rsiCurr !== null && closePrev !== null && closeCurr !== null && upperPrevVal !== null && lowerPrevVal !== null) {
+            const setupBuy = rsiPrev < rsiLevelDown && closePrev < lowerPrevVal;
+            const triggerBuy = rsiCurr >= rsiLevelDown && closeCurr > lowerPrevVal; 
+            const setupSell = rsiPrev > rsiLevelUp && closePrev > upperPrevVal;
+            const triggerSell = rsiCurr <= rsiLevelUp && closeCurr < upperPrevVal; 
+            if (setupBuy && triggerBuy) currentSignal = 'buy';
+            else if (setupSell && triggerSell) currentSignal = 'sell';
+        }
+        signals.push(currentSignal);
+      }
+      return { signals, warmupPeriod: warmup };
     }
+    function processNinjaBotData(candles) { return _calculateBotSignalsAndBacktest(candles, cypherImpulse); }
     function getATR_wizard(series, length, currentIndex) {
         if (currentIndex < length -1 || series.length < length) return null;
         let sumTR = 0; let count = 0;
@@ -1416,8 +1532,30 @@
         }
         return results;
     }
-    // --- End Bot Functions ---
-
+     function processWizardBotData(candles_input) {
+        return _calculateBotSignalsAndBacktest(candles_input, (c_arr) => {
+            const settings = {
+                atrLength: 10, factor: 3, trainingPeriod: 100,
+                highVolGuess: 0.75, midVolGuess: 0.5, lowVolGuess: 0.25,
+            };
+            const superTrendResults = calculateAdaptiveSuperTrend(c_arr, settings);
+            const signals = [];
+            let prevDirection = null;
+            for (let i = 0; i < superTrendResults.length; i++) {
+                const currentResult = superTrendResults[i];
+                let signal = null;
+                if (currentResult && currentResult.direction !== null) {
+                    if (prevDirection !== null) {
+                        if (currentResult.direction === 1 && prevDirection === -1) signal = 'buy';
+                        else if (currentResult.direction === -1 && prevDirection === 1) signal = 'sell';
+                    }
+                    prevDirection = currentResult.direction;
+                } else { prevDirection = null; }
+                signals.push(signal);
+            }
+            return { signals, warmupPeriod: settings.trainingPeriod + settings.atrLength };
+        });
+    }
 
     function panel_calculateAndDrawPOCZones(panelId) { 
         const panel = chartPanelInstances[panelId];
@@ -1789,7 +1927,6 @@
 
     // --- SCANNER PAGE LOGIC ---
     const scannerGridContainer = document.getElementById('scanner-page-grid-container');
-    // scannerNumChartsSelect is removed
 
     function initializeScannerPage() {
         const numCharts = 2; // Fixed to 2 screens
@@ -1808,13 +1945,13 @@
 
         scannerGridContainer.style.gridTemplateColumns = `repeat(2, 1fr)`; // Always 2 columns for 2 charts
 
-        const fixedBots = ['alien', 'fire']; // Define the bots for the two panels
+        const fixedBots = ['alien', 'fire']; 
 
         for (let i = 0; i < numCharts; i++) {
             const panelId = `scannerPanel-${i}`;
             chartPanelInstances[panelId] = { 
                 ...JSON.parse(JSON.stringify(DEFAULT_CHART_PANEL_SETTINGS)),
-                currentBot: fixedBots[i] // Assign fixed bot
+                currentBot: fixedBots[i] 
             }; 
             const panelElement = scanner_createChartPanelElement(panelId, fixedBots[i]);
             scannerGridContainer.appendChild(panelElement);
@@ -1822,7 +1959,7 @@
         }
     }
     
-    function scanner_createChartPanelElement(panelId, fixedBotId) { // Added fixedBotId
+    function scanner_createChartPanelElement(panelId, fixedBotId) { 
         const panelWrapper = document.createElement('div');
         panelWrapper.className = 'scanner-page-chart-panel-wrapper'; 
         panelWrapper.id = `chartPanelWrapper-${panelId}`;
@@ -1836,7 +1973,7 @@
         });
 
         let timeframeOptionsHTML = '';
-         Object.keys(CHART_PANEL_TIMEFRAME_CONFIG).forEach(tfKey => { // Use all available for user selection
+         Object.keys(CHART_PANEL_TIMEFRAME_CONFIG).forEach(tfKey => { 
             const tf = CHART_PANEL_TIMEFRAME_CONFIG[tfKey];
              timeframeOptionsHTML += `<option value="${tfKey}" ${DEFAULT_CHART_PANEL_SETTINGS.currentTimeframe === tfKey ? 'selected' : ''}>${tf.label}</option>`;
         });
@@ -1863,7 +2000,6 @@
                         <label for="chartPanelTimeframeSelect-${panelId}">Órbita:</label>
                         <select id="chartPanelTimeframeSelect-${panelId}">${timeframeOptionsHTML}</select>
                     </div>
-                    <!-- Bot Selector Removed -->
                     <div class="selector-group">
                         <label for="chartPanelTypeSelect-${panelId}">Tipo:</label>
                         <select id="chartPanelTypeSelect-${panelId}">
@@ -1924,7 +2060,6 @@
             chartPanel_fetchHistoricalData(panelId);
         });
 
-        // Set initial values for the panel instance (bot is already set)
         chartPanelInstances[panelId].currentAsset = assetSelect.value;
         chartPanelInstances[panelId].currentTimeframe = timeframeSelect.value;
         chartPanelInstances[panelId].currentChartType = panelWrapper.querySelector(`#chartPanelTypeSelect-${panelId}`).value;
@@ -1932,13 +2067,11 @@
         return panelWrapper;
     }
 
-    // scannerNumChartsSelect event listener is removed
-
     window.onload = () => {
         const savedTheme = localStorage.getItem('cypherXTheme_v1') || 'dark'; 
         applyTheme(savedTheme);
-        disableAuthNav(); // Start with Scanner/Logout hidden
-        showPage('auth-page'); // Start on login page
+        disableAuthNav(); 
+        showPage('auth-page'); 
     };
 
     </script>
