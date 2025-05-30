@@ -1,108 +1,235 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CypherX - Sua Plataforma Cósmica de Trades</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@^4.0.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/luxon@^3.0.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@^1.1.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial@^0.2.0/dist/chartjs-chart-financial.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@^3.0.0"></script>
-    <!-- SUPABASE CLIENT -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <style>
-        /* ... Seus estilos existentes permanecem aqui, sem alterações ... */
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CypherX - Sua Plataforma Cósmica de Trades</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@^4.0.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/luxon@^3.0.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@^1.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial@^0.2.0/dist/chartjs-chart-financial.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@^3.0.0"></script>
+  <!-- SUPABASE CLIENT -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    /* Exemplo básico de estilo, adapte conforme seu CSS original */
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background: #0b0f1a;
+      color: #fff;
+    }
+    .glass-card {
+      background: rgba(255 255 255 / 0.1);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 0 20px rgb(255 255 255 / 0.1);
+      max-width: 400px;
+      margin: 40px auto;
+      color: #fff;
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: 600;
+    }
+    input {
+      width: 100%;
+      padding: 8px 12px;
+      margin-top: 6px;
+      border-radius: 8px;
+      border: none;
+      background: rgba(255 255 255 / 0.15);
+      color: #fff;
+      font-size: 1em;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #2f80ed;
+      color: white;
+      font-weight: 700;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background: #1c5ed6;
+    }
+    p.error {
+      color: #ff4d4f;
+      margin-top: 8px;
+      font-size: 0.9em;
+    }
+    #welcome-message {
+      text-align: center;
+      font-weight: 700;
+      margin-top: 20px;
+      color: #4ade80; /* verde */
+    }
+  </style>
 </head>
 <body>
-    <!-- ... TODO O SEU CONTEÚDO EXISTENTE ... -->
+  <!-- Exemplo do seu conteúdo original, cabeçalho, menus, etc -->
+  <header style="padding: 20px; text-align:center; background:#121827;">
+    <h1>CypherX - Sua Plataforma Cósmica de Trades</h1>
+  </header>
 
-    <!-- Bloco de Autenticação Supabase (discreto, pode ser removido/ocultado se não quiser exibir na tela) -->
-    <div id="auth-area" style="max-width:400px;margin:40px auto;display:none;">
-      <form id="login-form" style="margin-bottom:18px;">
-        <label for="login-email">E-mail</label>
-        <input type="email" id="login-email" required>
-        <label for="login-password">Senha</label>
-        <input type="password" id="login-password" required>
-        <button type="submit">Entrar</button>
-        <p id="login-error" style="color:var(--destructive-color);font-size:0.95em;"></p>
-      </form>
-      <form id="register-form">
-        <label for="register-email">E-mail</label>
-        <input type="email" id="register-email" required>
-        <label for="register-password">Senha</label>
-        <input type="password" id="register-password" required>
-        <button type="submit">Cadastrar</button>
-        <p id="register-error" style="color:var(--destructive-color);font-size:0.95em;"></p>
-      </form>
-      <button id="logout-btn" style="display:none;margin-top:18px;">Sair</button>
-      <div id="welcome-message" style="display:none;margin-top:16px;color:var(--win-color);font-weight:bold;"></div>
-    </div>
+  <!-- Conteúdo principal do site (exemplo simples) -->
+  <main style="padding: 20px; max-width: 1000px; margin: auto;">
+    <p>Bem-vindo à plataforma CypherX! Aqui você pode acompanhar seus trades e análises.</p>
+    <!-- Você pode manter seus cards, gráficos e demais elementos aqui -->
+  </main>
 
-    <!-- Script de Autenticação Supabase -->
-    <script>
-      // Configuração do seu projeto Supabase
-      const SUPABASE_URL = 'https://crfrjpetkblwvhwordnr.supabase.co';
-      const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNyZnJqcGV0a2Jsd3Zod29yZG5yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg2MjE5NDAsImV4cCI6MjA2NDE5Nzk0MH0.BYp7py3Phpprg57JUkd6gRYA4WtYyyo2KF8ExEdx65E';
+  <!-- Área de autenticação Supabase -->
+  <section class="glass-card" aria-label="Autenticação">
+    <h2>Entrar</h2>
+    <form id="login-form" novalidate>
+      <label for="login-email">E-mail</label>
+      <input type="email" id="login-email" name="login-email" required autocomplete="email" />
+      <label for="login-password">Senha</label>
+      <input type="password" id="login-password" name="login-password" required autocomplete="current-password" />
+      <button type="submit">Entrar</button>
+      <p id="login-error" class="error" role="alert"></p>
+    </form>
 
-      const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    <hr style="margin: 32px 0; border-color: rgba(255 255 255 / 0.2);" />
 
-      // Função para atualizar interface
-      async function updateAuthUI() {
-        const { data: { session } } = await supabase.auth.getSession();
-        const authArea = document.getElementById('auth-area');
-        if (!authArea) return;
-        if (session) {
-          document.getElementById('login-form').style.display = 'none';
-          document.getElementById('register-form').style.display = 'none';
-          document.getElementById('logout-btn').style.display = 'block';
-          document.getElementById('welcome-message').style.display = 'block';
-          document.getElementById('welcome-message').textContent = 'Bem-vindo, ' + (session.user.email || 'usuário') + '!';
-        } else {
-          document.getElementById('login-form').style.display = 'block';
-          document.getElementById('register-form').style.display = 'block';
-          document.getElementById('logout-btn').style.display = 'none';
-          document.getElementById('welcome-message').style.display = 'none';
+    <h2>Criar Conta</h2>
+    <form id="register-form" novalidate>
+      <label for="register-name">Nome completo</label>
+      <input type="text" id="register-name" name="register-name" required autocomplete="name" />
+
+      <label for="register-email">E-mail</label>
+      <input type="email" id="register-email" name="register-email" required autocomplete="email" />
+
+      <label for="register-phone">Telefone</label>
+      <input type="tel" id="register-phone" name="register-phone" required autocomplete="tel" />
+
+      <label for="register-password">Senha</label>
+      <input type="password" id="register-password" name="register-password" required autocomplete="new-password" />
+
+      <button type="submit">Cadastrar</button>
+      <p id="register-error" class="error" role="alert"></p>
+    </form>
+
+    <button id="logout-btn" style="display:none; margin-top: 24px;">Sair</button>
+    <div id="welcome-message" style="display:none;"></div>
+  </section>
+
+  <script>
+    // Configuração do Supabase
+    const SUPABASE_URL = 'https://crfrjpetkblwvhwordnr.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNyZnJqcGV0a2Jsd3Zod29yZG5yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg2MjE5NDAsImV4cCI6MjA2NDE5Nzk0MH0.BYp7py3Phpprg57JUkd6gRYA4WtYyyo2KF8ExEdx65E';
+
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    async function updateAuthUI() {
+      const { data: { session } } = await supabase.auth.getSession();
+
+      const loginForm = document.getElementById('login-form');
+      const registerForm = document.getElementById('register-form');
+      const logoutBtn = document.getElementById('logout-btn');
+      const welcomeMessage = document.getElementById('welcome-message');
+      const loginError = document.getElementById('login-error');
+      const registerError = document.getElementById('register-error');
+
+      if (session) {
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'none';
+        logoutBtn.style.display = 'block';
+        loginError.textContent = '';
+        registerError.textContent = '';
+
+        // Buscar nome do perfil
+        const { data: profile, error } = await supabase
+          .from('profiles')
+          .select('username')
+          .eq('id', session.user.id)
+          .single();
+
+        const name = profile?.username || session.user.email || 'Usuário';
+        welcomeMessage.style.display = 'block';
+        welcomeMessage.textContent = `Bem-vindo, ${name}!`;
+      } else {
+        loginForm.style.display = 'block';
+        registerForm.style.display = 'block';
+        logoutBtn.style.display = 'none';
+        welcomeMessage.style.display = 'none';
+      }
+    }
+
+    // Login
+    document.getElementById('login-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const email = e.target['login-email'].value;
+      const password = e.target['login-password'].value;
+
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      document.getElementById('login-error').textContent = error ? error.message : '';
+      if (!error) updateAuthUI();
+    });
+
+    // Registro
+    document.getElementById('register-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const name = e.target['register-name'].value;
+      const email = e.target['register-email'].value;
+      const phone = e.target['register-phone'].value;
+      const password = e.target['register-password'].value;
+
+      // Registrar usuário
+      const { data: { user }, error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: name,
+            phone: phone
+          }
         }
-        // Exibe o bloco de autenticação (remova se for modal ou overlay)
-        authArea.style.display = 'block';
+      });
+
+      if (signUpError) {
+        document.getElementById('register-error').textContent = signUpError.message;
+        return;
       }
 
-      // Eventos de formulário
-      document.getElementById('login-form').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const email = document.getElementById('login-email').value;
-        const password = document.getElementById('login-password').value;
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
-        document.getElementById('login-error').textContent = error ? error.message : '';
-        updateAuthUI();
-      });
+      // Criar perfil
+      if (user) {
+        const { error: profileError } = await supabase.from('profiles').upsert({
+          id: user.id,
+          username: name,
+          phone: phone,
+          created_at: new Date().toISOString()
+        });
+        if (profileError) {
+          console.error('Erro ao criar perfil:', profileError);
+        }
+      }
 
-      document.getElementById('register-form').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const email = document.getElementById('register-email').value;
-        const password = document.getElementById('register-password').value;
-        const { error } = await supabase.auth.signUp({ email, password });
-        document.getElementById('register-error').textContent = error ? error.message : '';
-        if (!error) alert('Cadastro realizado! Verifique seu e-mail para confirmar.');
-        updateAuthUI();
-      });
-
-      document.getElementById('logout-btn').addEventListener('click', async function() {
-        await supabase.auth.signOut();
-        updateAuthUI();
-      });
-
-      // Atualiza UI ao carregar
+      document.getElementById('register-error').textContent = '';
+      alert('Cadastro realizado! Verifique seu e-mail para confirmar.');
       updateAuthUI();
-      // Atualiza UI ao mudar sessão (login/logout em outras abas)
-      supabase.auth.onAuthStateChange((_event, _session) => {
-        updateAuthUI();
-      });
-    </script>
+    });
+
+    // Logout
+    document.getElementById('logout-btn').addEventListener('click', async () => {
+      await supabase.auth.signOut();
+      updateAuthUI();
+    });
+
+    // Atualiza UI ao carregar e ao mudar sessão
+    updateAuthUI();
+    supabase.auth.onAuthStateChange(() => {
+      updateAuthUI();
+    });
+  </script>
 </body>
 </html>
