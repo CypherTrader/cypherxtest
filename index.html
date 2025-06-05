@@ -1399,7 +1399,7 @@
 
     function processAlienBotData(candles) { 
         return _calculateBotSignalsAndBacktest(candles, (c_arr) => { 
-            const guideLength = 90, length = 18, rsiLength =2, rsiLowerBand = 15;
+            const guideLength = 90, length = 18, rsiLength =1, rsiLowerBand = 15;
             const closes = c_arr.map(d=>d.c), opens = c_arr.map(d=>d.o), volumes = c_arr.map(d=>d.v||0);
             const guia = arrayWma(closes, guideLength);
             const movimentacao = closes.map((val,i)=>(val!==null&&opens[i]!==null)?val-opens[i]:null);
@@ -1418,7 +1418,7 @@
 
     function processFireBotData(candles) {
         return _calculateBotSignalsAndBacktest(candles, (c_arr) => {
-            const guideLength=90,length=18,rsiLength= 2,rsiUpperBand=85;
+            const guideLength=90,length=18,rsiLength= 1,rsiUpperBand=85;
             const closes=c_arr.map(d=>d.c),opens=c_arr.map(d=>d.o),volumes=c_arr.map(d=>d.v||0);
             const guia=arrayWma(closes,guideLength);
             const movimentacao=closes.map((val,i)=>(val!==null&&opens[i]!==null)?val-opens[i]:null);
